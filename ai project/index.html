@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pakar Rekomendasi Bacaan Anak</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+    <div id="aiThinking" class="ai-thinking-container">
+        <div class="ai-robot">
+            <div class="robot-head">
+                <div class="robot-eye left"></div>
+                <div class="robot-eye right"></div>
+                <div class="robot-mouth"></div>
+            </div>
+        </div>
+        
+        <div class="ai-text" id="aiStatus">AI sedang menganalisis...</div>
+        
+        <div class="ai-message">
+            <div class="typing-text" id="typingText"></div>
+            <span class="cursor"></span>
+        </div>
+        
+        <div class="ai-data-flow">
+            <div class="data-node"></div>
+            <div class="data-node"></div>
+            <div class="data-node"></div>
+            <div class="data-node"></div>
+            <div class="data-node"></div>
+        </div>
+        
+        <div class="ai-processing-bar">
+            <div class="ai-progress"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>🤖 Sistem Pakar AI - Rekomendasi Bacaan Anak</h1>
+                <p>Kecerdasan Buatan akan membantu menemukan buku terbaik untuk anak Anda</p>
+            </div>
+        </header>
+
+        <!-- Section Rekomendasi Cepat -->
+        <div class="quick-recommendations">
+            <h2>⚡ Rekomendasi Cepat dengan AI</h2>
+            <div class="quick-buttons">
+                <button class="quick-btn" data-age="2">
+                    <span class="age-icon">👶</span>
+                    <span>Usia 1-3 Tahun</span>
+                </button>
+                <button class="quick-btn" data-age="5">
+                    <span class="age-icon">🧒</span>
+                    <span>Usia 4-6 Tahun</span>
+                </button>
+                <button class="quick-btn" data-age="8">
+                    <span class="age-icon">👦</span>
+                    <span>Usia 7-9 Tahun</span>
+                </button>
+                <button class="quick-btn" data-age="11">
+                    <span class="age-icon">👧</span>
+                    <span>Usia 10-12 Tahun</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>🔍 Identifikasi Detail dengan AI</h2>
+            <form id="childForm">
+                <div class="form-group">
+                    <label for="childName">Nama Anak:</label>
+                    <input type="text" id="childName" name="childName" placeholder="Masukkan nama anak" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">Usia Anak (tahun):</label>
+                        <input type="number" id="age" name="age" min="1" max="12" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="readingLevel">Kemampuan Membaca:</label>
+                        <select id="readingLevel" name="readingLevel" required>
+                            <option value="">Pilih Level</option>
+                            <option value="pemula">Pemula (Baru Belajar)</option>
+                            <option value="menengah">Menengah (Sudah Lancar)</option>
+                            <option value="mahir">Mahir (Membaca Cepat)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Minat Anak:</label>
+                    <div class="interests">
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="hewan">
+                            <span class="interest-icon">🐵</span>
+                            <span>Hewan</span>
+                        </label>
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="petualangan">
+                            <span class="interest-icon">🏝️</span>
+                            <span>Petualangan</span>
+                        </label>
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="fantasi">
+                            <span class="interest-icon">🧙</span>
+                            <span>Fantasi</span>
+                        </label>
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="edukasi">
+                            <span class="interest-icon">📚</span>
+                            <span>Edukasi</span>
+                        </label>
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="komik">
+                            <span class="interest-icon">🎨</span>
+                            <span>Komik</span>
+                        </label>
+                        <label class="interest-item">
+                            <input type="checkbox" name="interests" value="sains">
+                            <span class="interest-icon">🔬</span>
+                            <span>Sains</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn primary-btn">
+                    <span class="btn-icon">🤖</span>
+                    Biarkan AI Mencari Rekomendasi
+                </button>
+            </form>
+        </div>
+
+        <!-- Section untuk menampilkan semua buku -->
+        <div class="all-books-section">
+            <h2>📚 Database Buku</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Semua Buku</button>
+                <button class="filter-btn" data-filter="1-3">👶 1-3 Tahun</button>
+                <button class="filter-btn" data-filter="4-6">🧒 4-6 Tahun</button>
+                <button class="filter-btn" data-filter="7-9">👦 7-9 Tahun</button>
+                <button class="filter-btn" data-filter="10-12">👧 10-12 Tahun</button>
+            </div>
+            <div id="allBooksList" class="books-grid"></div>
+        </div>
+
+        <div id="recommendationResult" class="result-section hidden">
+            <h2 id="resultTitle">🎯 Rekomendasi AI</h2>
+            <div id="bookList" class="books-grid"></div>
+            
+            <!-- Section Video Rekomendasi -->
+            <div class="video-section">
+                <h3>🎬 Video Rekomendasi Terkait</h3>
+                <div id="videoList" class="video-grid"></div>
+            </div>
+            <button id="backButton" class="btn secondary-btn">
+                <span class="btn-icon">↶</span>
+                Kembali ke Menu Utama
+            </button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
